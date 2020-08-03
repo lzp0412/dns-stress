@@ -2,10 +2,10 @@ package main
 
 import (
 	"bufio"
-	"coredns/plugin/pkg/log"
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"math/rand"
 	"net"
 	"os"
@@ -83,7 +83,7 @@ func main() {
 func initFile(output string) {
 	file, err := os.OpenFile(output+"/result.log", os.O_CREATE|os.O_RDWR|os.O_APPEND, os.ModeAppend|os.ModePerm)
 	if err != nil {
-		log.Infof("open file error:%+v", err)
+		log.Printf("open file error:%+v", err)
 		panic("open file fail")
 	}
 	writeFile = file
