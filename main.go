@@ -68,11 +68,19 @@ func main() {
 					rdom := strconv.Itoa(rand.Intn(1000000000)) + "." + dom
 					start := time.Now()
 					address, err := net.LookupHost(rdom)
-					writeFile.Write([]byte(fmt.Sprintf("%d|%s|%d|%d|%+v\n", time.Now().Unix(), rdom, len(address), time.Since(start)/1e6, err)))
+					if err != nil {
+						writeFile.Write([]byte(fmt.Sprintf("%d|%s|%d|%d|%+v\n", time.Now().Unix(), rdom, len(address), time.Since(start)/1e6, err)))
+					} else {
+						writeFile.Write([]byte(fmt.Sprintf("%d|%s|%d|%d|\n", time.Now().Unix(), rdom, len(address), time.Since(start)/1e6)))
+					}
 				}
 				start := time.Now()
 				address, err := net.LookupHost(dom)
-				writeFile.Write([]byte(fmt.Sprintf("%d|%s|%d|%d|%+v\n", time.Now().Unix(), dom, len(address), time.Since(start)/1e6, err)))
+				if err != nil {
+					writeFile.Write([]byte(fmt.Sprintf("%d|%s|%d|%d|%+v\n", time.Now().Unix(), dom, len(address), time.Since(start)/1e6, err)))
+				} else {
+					writeFile.Write([]byte(fmt.Sprintf("%d|%s|%d|%d|\n", time.Now().Unix(), dom, len(address), time.Since(start)/1e6)))
+				}
 				time.Sleep(time.Duration(interval) * time.Millisecond)
 			}
 		}()
