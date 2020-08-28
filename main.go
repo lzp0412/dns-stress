@@ -2,9 +2,9 @@ package main
 
 import (
 	"bufio"
-	"coredns/plugin/pkg/parse"
 	"flag"
 	"fmt"
+	"github.com/coredns/coredns/plugin/pkg/parse"
 	"github.com/miekg/dns"
 	"io"
 	"log"
